@@ -31,6 +31,20 @@ export const addComments = comments => ({
     payload: comments
 });
 
+export const postComment = (campsiteId, rating, author, text) => dispatch => {
+    const newComment = {campsiteId, rating, author, text};
+    newComment.date = new Date().toISOString();
+    console.log('*******************', newComment);
+    setTimeout(()=> 
+    {dispatch(addComment(newComment));
+    }, 2000);
+}
+
+export const addComment = comment =>({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment        
+});
+
 export const fetchCampsites = () => dispatch => {
 
     dispatch(campsitesLoading());
@@ -38,7 +52,7 @@ export const fetchCampsites = () => dispatch => {
     return fetch(baseUrl + 'campsites')
         .then(response => {
                 if (response.ok) {
-                    return response;
+                    return response;                                  
                 } else {
                     const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;

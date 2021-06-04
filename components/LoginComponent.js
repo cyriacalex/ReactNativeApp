@@ -28,10 +28,10 @@ class Login extends Component {
                     username: this.state.username,
                     password: this.state.password
                 })
-            ).catch(error => console.log('Could not save user info', error));
+            ).catch(error => console.log('Could not save user info: ', error));
         } else {
             SecureStore.deleteItemAsync('userinfo').catch(
-                error => console.log('Could not delete user info', error)
+                error => console.log('Could not delete user info: ', error)
             );
         }
     }
